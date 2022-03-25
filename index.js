@@ -2,8 +2,15 @@ export default class DataStackService {
     constructor(settings) {
         this.HeadersResponses = {};
         this.Settings = settings;
-        this.Settings.Provider = settings.Provider || (`${settings.NativeProvider || './'}ServicesAwake`);
+        this.Settings.Provider = settings.Provider || (`${settings.NativeProvider || './'}${this.GetTypePath(this.Settings.Type || 'custom')}`);
         this.Settings.Lang = settings.Lang || ('Fr-fr');
+    }
+    GetTypePath(type) {
+        switch (type) {
+            case 'ggn': return 'ServicesAwake';
+            default:
+            case 'custom': return '';
+        }
     }
     URLTranscriber($URL, $Data) {
         Object.keys($Data).forEach(($Key) => {

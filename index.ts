@@ -11,9 +11,26 @@ export default class DataStackService<T extends DataStackServiceResponseData>{
 
         this.Settings = settings;
 
-        this.Settings.Provider = settings.Provider || (`${settings.NativeProvider || './'}ServicesAwake`);
+        this.Settings.Provider = settings.Provider || (`${settings.NativeProvider || './'}${ this.GetTypePath(this.Settings.Type||'custom')  }`);
 
         this.Settings.Lang = settings.Lang || ('Fr-fr');
+
+    }
+
+
+
+    GetTypePath(type : DataStackServiceType) : string{
+
+        switch(type){
+
+            case 'ggn': return 'ServicesAwake';
+
+            
+            default:
+
+            case 'custom': return '';
+            
+        }
 
     }
 
