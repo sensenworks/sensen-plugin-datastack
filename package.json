@@ -1,9 +1,9 @@
 {
   "name": "sensen-plugin-datastack",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A Sensen API REST Controller",
   "main": "index.js",
-  "author": "G.Y. Yannick",
+  "author": "IanCarterWork",
   "license": "MIT",
   "repository": {
     "url": "https://github.com/IanCarterWork/sensen-plugin-datastack"
