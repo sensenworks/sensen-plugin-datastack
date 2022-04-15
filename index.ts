@@ -11,7 +11,7 @@ export default class DataStackService<T extends DataStackServiceResponseData>{
 
         this.Settings = settings;
 
-        this.Settings.Provider = settings.Provider || (`${settings.NativeProvider || './'}${ this.GetTypePath(this.Settings.Type||'custom')  }`);
+        this.Settings.Provider = settings.Provider || (`${settings.NativeProvider || './'}${ this.GetTypePath(this.Settings.Type||'sensen')  }`);
 
         this.Settings.Lang = settings.Lang || ('Fr-fr');
 
@@ -23,9 +23,13 @@ export default class DataStackService<T extends DataStackServiceResponseData>{
 
         switch(type){
 
-            case 'ggn': return 'ServicesAwake';
-
+            case 'ggn': return 'ServicesAwake/';
             
+
+            case 'wordpress': return '/wp-json/v2/';
+
+            case 'sensen': return '/';
+
             default:
 
             case 'custom': return '';
@@ -277,7 +281,7 @@ export default class DataStackService<T extends DataStackServiceResponseData>{
 
     SetFetchURL($Features : DataStackServiceFeatures<T>){
 
-        let $URL = $Features.Url||(`${this.Settings.Provider}/${$Features.Name||''}`)
+        let $URL = $Features.Url||(`${this.Settings.Provider}${$Features.Name||''}`)
 
 
         $Features.Data = typeof $Features['Data'] == 'object' ? $Features.Data : {};

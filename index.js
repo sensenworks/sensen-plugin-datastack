@@ -2,12 +2,14 @@ export default class DataStackService {
     constructor(settings) {
         this.HeadersResponses = {};
         this.Settings = settings;
-        this.Settings.Provider = settings.Provider || (`${settings.NativeProvider || './'}${this.GetTypePath(this.Settings.Type || 'custom')}`);
+        this.Settings.Provider = settings.Provider || (`${settings.NativeProvider || './'}${this.GetTypePath(this.Settings.Type || 'sensen')}`);
         this.Settings.Lang = settings.Lang || ('Fr-fr');
     }
     GetTypePath(type) {
         switch (type) {
-            case 'ggn': return 'ServicesAwake';
+            case 'ggn': return 'ServicesAwake/';
+            case 'wordpress': return '/wp-json/v2/';
+            case 'sensen': return '/';
             default:
             case 'custom': return '';
         }
@@ -136,7 +138,7 @@ export default class DataStackService {
         };
     }
     SetFetchURL($Features) {
-        let $URL = $Features.Url || (`${this.Settings.Provider}/${$Features.Name || ''}`);
+        let $URL = $Features.Url || (`${this.Settings.Provider}${$Features.Name || ''}`);
         $Features.Data = typeof $Features['Data'] == 'object' ? $Features.Data : {};
         if (this.Settings.AppiD) {
             $Features.Data.AppiD = this.Settings.AppiD;

@@ -4,7 +4,7 @@ declare type DataStackServiceMethods = 'GET' | 'POST' | 'PUT' | 'OPTIONS' | 'PAT
 
 declare type DataStackServiceOutput = '-arraybuffer' | '-blob' | '-text' | '-formdata' | '-json'
 
-declare type DataStackServiceType = 'ggn' | /* 'wordpress' | */ 'custom'
+declare type DataStackServiceType = 'sensen' | 'ggn' | 'wordpress' | 'custom'
 
 
 declare type DataStackServiceSettings = {
