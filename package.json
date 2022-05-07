@@ -1,6 +1,6 @@
 {
   "name": "sensen-plugin-datastack",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A Sensen API REST Controller",
   "main": "index.js",
   "author": "IanCarterWork",
