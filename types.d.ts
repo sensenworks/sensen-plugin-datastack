@@ -15,7 +15,8 @@ declare type DataStackServiceSettings = {
     AppiD?: string;
     Version?: string;
     PiD?: number;
-    Type?: DataStackServiceType
+    Type?: DataStackServiceType;
+    UserAgent?: string;
 }
 
 declare type DataStackServiceOptions = RequestInit & { }

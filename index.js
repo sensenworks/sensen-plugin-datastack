@@ -1,3 +1,7 @@
+// const localStorage = (typeof Window == 'object' && 'localStorage' in globalThis) ? globalThis.localStorage : {
+//     setItem(name: string, value : any){},
+//     getItem(name: string){},
+// }
 export default class DataStackService {
     constructor(settings) {
         this.HeadersResponses = {};
@@ -60,13 +64,13 @@ export default class DataStackService {
         return null;
     }
     SaveLocalStorage($Data) {
-        if (typeof $Data == 'object') {
+        if (typeof $Data == 'object' && typeof localStorage == 'object') {
             Object.keys($Data).forEach((k) => localStorage.setItem(k, $Data[k]));
         }
         return this;
     }
     ResponseParser(r) {
-        if (r) {
+        if (r && typeof localStorage == 'object') {
             if ('ClientTokenID' in r) {
                 localStorage.setItem('@ClientTokenID', r.ClientTokenID || null);
             }
@@ -115,8 +119,10 @@ export default class DataStackService {
             'Content-Type': ($Features.ContentType || 'application/json').toString(),
             "API-KEY": this.Settings.APIKey,
             "API-CLIENT-LANG": this.Settings.Lang,
-            "CLIENT-TOKEN-ID": localStorage.getItem('@ClientTokenID') || ''
-            // ,"UUiD": localStorage.getItem('@UUiD')||''
+            "CLIENT-TOKEN-ID": (typeof localStorage == 'object') ? localStorage.getItem('@ClientTokenID') || '' : ''
+            // ,"UUiD": localStorage.getItem('@UUiD')||'',
+            ,
+            "USER-AGENT": this.Settings.UserAgent || '',
         }, $Features.Headers);
         Object.keys($Features.Headers).forEach(($k) => {
             if ($Features.Headers) {

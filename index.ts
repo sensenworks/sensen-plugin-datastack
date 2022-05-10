@@ -1,4 +1,12 @@
 
+// const localStorage = (typeof Window == 'object' && 'localStorage' in globalThis) ? globalThis.localStorage : {
+
+//     setItem(name: string, value : any){},
+
+//     getItem(name: string){},
+    
+// }
+
 
 export default class DataStackService<T extends DataStackServiceResponseData>{
 
@@ -130,7 +138,7 @@ export default class DataStackService<T extends DataStackServiceResponseData>{
 
     SaveLocalStorage($Data : T){
 
-        if(typeof $Data == 'object'){
+        if(typeof $Data == 'object' && typeof localStorage == 'object'){
 
             Object.keys($Data).forEach((k)=> localStorage.setItem(k,$Data[k]) );
             
@@ -143,7 +151,7 @@ export default class DataStackService<T extends DataStackServiceResponseData>{
     
     ResponseParser(r : T){
 
-        if(r){
+        if(r && typeof localStorage == 'object'){
 
             if('ClientTokenID' in r){ localStorage.setItem('@ClientTokenID', r.ClientTokenID || null); }
 
@@ -232,9 +240,11 @@ export default class DataStackService<T extends DataStackServiceResponseData>{
 
             ,"API-CLIENT-LANG":this.Settings.Lang
 
-            ,"CLIENT-TOKEN-ID": localStorage.getItem('@ClientTokenID')||''
+            ,"CLIENT-TOKEN-ID": (typeof localStorage == 'object') ? localStorage.getItem('@ClientTokenID')||'' : ''
 
-            // ,"UUiD": localStorage.getItem('@UUiD')||''
+            // ,"UUiD": localStorage.getItem('@UUiD')||'',
+
+            ,"USER-AGENT": this.Settings.UserAgent||'',
         
         }, $Features.Headers)
 
