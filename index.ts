@@ -349,7 +349,7 @@ export default class DataStackService<T extends DataStackServiceResponseData>{
 
     async SetFetchOutput($Features : DataStackServiceFeatures<T>){
 
-        this.HeadersResponses = $Features.Listener?.headers || new Headers();
+        this.HeadersResponses = ( $Features.Listener ) ? $Features.Listener.headers : new Headers();
 
         switch($Features.Output){
 

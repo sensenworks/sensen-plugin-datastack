@@ -176,7 +176,7 @@ export default class DataStackService {
         return $URL;
     }
     async SetFetchOutput($Features) {
-        this.HeadersResponses = $Features.Listener?.headers || new Headers();
+        this.HeadersResponses = ($Features.Listener) ? $Features.Listener.headers : new Headers();
         switch ($Features.Output) {
             case '-arraybuffer': return $Features.Listener?.arrayBuffer();
             case '-blob': return $Features.Listener?.blob();
